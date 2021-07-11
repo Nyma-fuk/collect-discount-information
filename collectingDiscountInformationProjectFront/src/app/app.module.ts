@@ -15,15 +15,29 @@ import { MatToolbarModule } from '@angular/material/toolbar';  // <-- 追加
 import { MatSidenavModule } from '@angular/material/sidenav';  // <-- 追加
 import { MatListModule } from '@angular/material/list';  // <-- 追加
 import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
 
+//追加 7/11
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
+import { RouterModule, Routes } from '@angular/router';
+
+const ROUTE_TABLE: Routes = [
+  { path: 'header', component: HeaderComponent },
+  { path: 'login', component: LoginComponent },
+];
+//
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -35,11 +49,19 @@ registerLocaleData(en);
     MatToolbarModule,  // <-- 追加
     MatSidenavModule,  // <-- 追加
     MatListModule,  // <-- 追加
+    
+    RouterModule.forRoot(ROUTE_TABLE), // 追加. routing の情報を登録する
 
+    // add this!
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
     
   ],
   
   providers: [{ provide: NZ_I18N, useValue: en_US }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule]
 })
 export class AppModule { }
